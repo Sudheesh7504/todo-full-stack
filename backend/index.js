@@ -7,11 +7,6 @@ mongoose.connect(uri)
     .catch(err => console.error("❌ Connection error:", err));
 
 
-
-
-
-
-
 const Todo = require('./models/todo');
 
 const express = require('express');
@@ -32,8 +27,14 @@ app.get('/', (req, res) => {
 
 app.get('/todos', async (req, res) => {
     const todos = await Todo.find();
-    res.json(todos);
+    const formattedTodos = todos.map(todo => ({
+        id: todo._id,
+        task: todo.task,
+        done: todo.done
+    }));
+    res.json(formattedTodos);
 });
+
 
 app.get('/test-insert', async (req, res) => {
     try {
