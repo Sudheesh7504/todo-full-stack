@@ -1,0 +1,16 @@
+<div class="to-do-list-container">
+    <div class="new-task-adding">
+        <input [(ngModel)]="newTask" placeholder="New Task" />
+        <button (click)="addToDo()">Add Task</button>
+    </div>
+    <ul>
+        <li *ngFor="let item of tasks ;let i = index">
+            <input type="checkbox" [checked]="item.done" (change)="toggleDone(item)" />
+            {{ item.task }}
+            <input type="text" [(ngModel)]="item.task" (blur)="editTask(item, item.task)" />
+            <span *ngIf="item.done">✅</span>
+            <button (click)="deleteTask(item.id)">❌</button>
+        </li>
+    </ul>
+
+</div>
